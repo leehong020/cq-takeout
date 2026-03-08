@@ -91,4 +91,14 @@ public class EmployeeServiceImpl implements EmployeeService {
         List<Employee> list = page.getResult();
         return new PageResult(total, list);
     }
+
+    public void startOrStop(Integer status, Long id) {
+        Employee employee = new Employee();
+        employee.setId(id);
+        employee.setStatus(status);
+        employee.setUpdateTime(LocalDateTime.now());
+        //设置修改人的id
+        employee.setUpdateUser(BaseContext.getCurrentId());
+        employeeMapper.update(employee);
+    }
 }
